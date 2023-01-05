@@ -5,17 +5,17 @@ import { useState,useEffect } from 'react';
 
 function App() {
   const [location,setLocation] = useState('');
-  const getWeather = function(){
-    console.log("Weather");
-    
-  }
+  const [weather,setWeather] = useState({});
   return (
     <div className='body'>
       <Search
       setLocation={(event)=>{setLocation(event.target.value)}}
-      getWeather={getWeather}
+      location={location}
+      setWeather={setWeather}
       />
-      <Display />
+      <Display
+      weather={weather} 
+      />
     </div>
   );
 }

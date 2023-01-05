@@ -1,19 +1,39 @@
 import React from 'react'
-import TextField from '@mui/material/TextField';
-import { useState,useEffect } from 'react';
 import './Search.css'
+import {key} from './Keys'
 
 export default function Search(props) {
-    const [call,setCall] = useState(false) 
 
     const handleKeyDown = function(event){
-        if(event.key=='Enter'){
-            console.log("Hello");
+        if(event.key==='Enter'){
+            fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${props.location}&limit=5&APPID=${key}`)
+                .then((response)=>response.json())
+                .then((user)=>{
+                    const lat = user[0].lat;
+                    const lon = user[0].lon;
+                    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${key}&units=imperial`)
+                        .then((response)=>response.json())
+                        .then((user)=>{
+                            console.log(user)
+                            props.setWeather(user)
+                        })
+                })
         }
     }
 
     const handleButtonClick = function(){
-        console.log("Hell")
+        fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${props.location}&limit=5&APPID=${key}`)
+        .then((response)=>response.json())
+        .then((user)=>{
+            const lat = user[0].lat;
+            const lon = user[0].lon;
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${key}&units=imperial`)
+                .then((response)=>response.json())
+                .then((user)=>{
+                    console.log(user)
+                    props.setWeather(user)
+                })
+        })
     }
 
 
