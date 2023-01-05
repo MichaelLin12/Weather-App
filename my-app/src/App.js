@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import Search from './Search.js';
+import Display from './Display.js';
 import './App.css';
+import { useState,useEffect } from 'react';
 
 function App() {
+  const [location,setLocation] = useState('');
+  const getWeather = function(){
+    console.log("Weather");
+    
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='body'>
+      <Search
+      setLocation={(event)=>{setLocation(event.target.value)}}
+      getWeather={getWeather}
+      />
+      <Display />
     </div>
   );
 }
